@@ -114,7 +114,7 @@ void JL_Set_Time()//设置时钟
     else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
   }
 }
-int StrtoChar(String(p))
+String StrtoChar(String(p))
 {
   int pslen = p.length() + 1; 
   char psarray[pslen];
