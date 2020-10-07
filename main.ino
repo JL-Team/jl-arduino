@@ -114,7 +114,18 @@ void JL_Set_Time()//设置时钟
     else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
   }
 }
-
+int StrtoChar(String(p))
+{
+  int pslen = p.length() + 1; 
+  char psarray[pslen];
+  p.toCharArray(psarray, pslen);
+  return p;
+}
+char n;//从这开始为重要程序
+int id = 1;
+String T = "";
+String C = "";
+String Q = "";
 void loop()
 {
   delay(100);
@@ -126,37 +137,42 @@ void loop()
        JL_Set_Time();
   }      
   else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
-}
-
-
-
-
-
-///////hi，在看吗？
-//////能看到吗？
-/////对了这个程序不是最新的
-/*
-void setup()
-{
-  Serial.begin(9600);//波特率9600删掉
-}
-char n;//从这开始为重要程序
-void loop()
-{
   while(Serial.available() > 0)//检测是否有输入
   {
-    n = int(Serial.read());//存入N
-    if(n == ';')
+    n = int(Serial.read());
+    if(n == '$')
     {
-      Serial.println("");//检测是否是结尾
+      delay(10);
+      Serial.println(T);//感染人数
+      RSCG12864B.print_string_12_xy(1,1,StrtoChar(T));
+      Serial.println(C);//年月日
+      RSCG12864B.print_string_12_xy(1,1,StrtoChar(C));
+      Serial.println(Q);//天气
+      RSCG12864B.print_string_12_xy(1,1,StrtoChar(Q));
+      id = 1;
+      T = "";
+      C = "";
+      Q = "";
+    }
+    else if(n == ';')
+    {
+      id++;
+      //Serial.println(id);
     }
     else
     {
-      Serial.print(n);//打印 可改为输出到屏幕
+      switch(id)
+      {
+        case 1:T = T+String(n);break;
+        case 2:C = C+String(n);break;
+        case 3:Q = Q+String(n);break;
+        default:break;
+      }
     }
   }
 }
-*/
+
+
 
 /*
 *————————————————————————————————————————————————*
@@ -189,10 +205,6 @@ void linkBluetooth()
 }
 
 *————————————————————————————————————————————————*
-void setup()
-{
-  Serial.begin(9600);//波特率9600删掉
-}
 char n;//从这开始为重要程序
 int id = 1;
 String T = "";
