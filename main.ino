@@ -1,6 +1,7 @@
 #include <dht11.h>
 #include <Wire.h> 
 #include <RSCG12864B.h>
+
 dht11 DHT11;
 #define DHT11PIN A0
 int nzx = 90,nzy = 40;
@@ -25,7 +26,7 @@ void setup()
   pinMode(11,INPUT);//
   pinMode(12,OUTPUT);//
   pinMode(8,INPUT);//按钮1
-  pinMode(9,INPUT);//按钮2
+  pinMode(9,INPUT);//按钮2p
   pinMode(10,INPUT);//按钮3
   pinMode(13,OUTPUT);//
   JL_ScreenSetup();
@@ -114,11 +115,11 @@ void JL_Set_Time()//设置时钟
     else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
   }
 }
-String StrtoChar(String(p))
+char StrtoChar(String(p))
 {
   char charBuf[1001];
   p.toCharArray(charBuf, 1001);
-  return p;
+  return charBuf;
 }
 char n;//从这开始为重要程序
 int id = 1;
