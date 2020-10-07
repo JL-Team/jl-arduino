@@ -1,7 +1,7 @@
-//#include <SimpleDHT.h>
+#include <SimpleDHT.h>
 #include <Wire.h> 
 #include <RSCG12864B.h>
-//SimpleDHT11 dht11(12);
+SimpleDHT11 dht11(12);
 int nzx = 90,nzy = 40;
 int nzhi = 0;
 int nzmi = 0;
