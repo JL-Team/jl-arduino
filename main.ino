@@ -1,3 +1,4 @@
+/*有事可以找我的呀-->20260104@tsinglan.cn*/
 #include <SimpleDHT.h>
 #include <Wire.h> 
 #include <RSCG12864B.h>
