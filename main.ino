@@ -1,7 +1,7 @@
-#include <SimpleDHT.h>
+//#include <SimpleDHT.h>
 #include <Wire.h> 
 #include <RSCG12864B.h>
-SimpleDHT11 dht11(12);
+//SimpleDHT11 dht11(12);
 int nzx = 90,nzy = 40;
 int nzhi = 0;
 int nzmi = 0;
@@ -27,6 +27,16 @@ void setup()
   pinMode(10,INPUT);//按钮3
   pinMode(13,OUTPUT);//
   JL_ScreenSetup();
+}
+void bibibi()
+{
+  for(int hh = 0;hh < 4;hh++)
+  {
+    tone(0,1000);
+    delay(100);
+    noTone(0);
+    delay(100);
+  }
 }
 void JL_ScreenSetup()
 {
@@ -58,7 +68,7 @@ void JL_Set_Time()//设置时钟
   RSCG12864B.print_string_12_xy(nzx+15,nzy,nzm[xm]);
 
   while(1)
-  { 
+  {
     if(hpressed==0 && digitalRead(9)==0)//设置小时
     {
        hpressed = 1;
@@ -68,7 +78,7 @@ void JL_Set_Time()//设置时钟
        RSCG12864B.print_string_16_xy(nzx-50,nzy-4,"Alarm:");
        RSCG12864B.print_string_12_xy(nzx,nzy,nzh[xh]);
        RSCG12864B.print_string_12_xy(nzx+15,nzy,nzm[xm]);
-    }      
+    }   
     else if(hpressed==1 && digitalRead(9)==1)      hpressed = 0;
     if(mpressed==0 && digitalRead(10)==0)//设置时间
     {
@@ -79,7 +89,7 @@ void JL_Set_Time()//设置时钟
        RSCG12864B.print_string_16_xy(nzx-50,nzy-4,"Alarm:");
        RSCG12864B.print_string_12_xy(nzx,nzy,nzh[xh]);
        RSCG12864B.print_string_12_xy(nzx+15,nzy,nzm[xm]);
-    }      
+    }
     else if(mpressed==1 && digitalRead(10)==1)      mpressed = 0;
 
     if(digitalRead(8)==0)//推出
@@ -87,11 +97,15 @@ void JL_Set_Time()//设置时钟
         RSCG12864B.clear();
         while(digitalRead(8)==0){}
         return; 
-    }      
-    else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
+    }
+    else if(tpressed==1 && digitalRead(8)==1){tpressed = 0;}
   }
 }
-
+char n;
+int id = 1;
+String T = "";
+String C = "";
+String Q = "";
 void loop()
 {
   delay(100);
@@ -108,13 +122,13 @@ void loop()
     n = int(Serial.read());
     if(n == '$')
     {
-      delay(10);
+      delay(1);
       Serial.println(T);//感染人数
       RSCG12864B.print_string_12_xy(30,6,T);
       Serial.println(C);//年月日
-      RSCG12864B.print_string_12_xy(30,26,C);
+      RSCG12864B.print_string_12_xy(30,6,C);
       Serial.println(Q);//天气
-      RSCG12864B.print_string_12_xy(30,46,Q);
+      RSCG12864B.print_string_12_xy(30,6,Q);
       id = 1;
       T = "";
       C = "";
