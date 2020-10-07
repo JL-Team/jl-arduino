@@ -166,4 +166,51 @@ void linkBluetooth()
 }
 
 *————————————————————————————————————————————————*
+void setup()
+{
+  Serial.begin(9600);//波特率9600删掉
+}
+char n;//从这开始为重要程序
+int id = 1;
+String T = "";
+String C = "";
+String Q = "";
+void loop()
+{
+  while(Serial.available() > 0)//检测是否有输入
+  {
+    n = int(Serial.read());
+    if(n == '$')
+    {
+      delay(10);
+      Serial.println(T);//感染人数
+      Serial.println(C);//年月日
+      Serial.println(Q);//天气
+      id = 1;
+      T = "";
+      C = "";
+      Q = "";
+    }
+    else if(n == ';')
+    {
+      id++;
+      //Serial.println(id);
+    }
+    else
+    {
+      switch(id)
+      {
+        case 1:T = T+String(n);break;
+        case 2:C = C+String(n);break;
+        case 3:Q = Q+String(n);break;
+        default:break;
+      }
+    }
+  }
+}
+      //int id3 = (int(id1)-48)*(int(id2)-48);
+      //Serial.println(nzh[id3]);//nzh[id3] 打印天气
+      }
+
+*————————————————————————————————————————————————*
 */
