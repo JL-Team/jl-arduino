@@ -116,9 +116,8 @@ void JL_Set_Time()//设置时钟
 }
 String StrtoChar(String(p))
 {
-  int pslen = p.length() + 1; 
-  char psarray[pslen];
-  p.toCharArray(psarray, pslen);
+  char charBuf[1001];
+  p.toCharArray(charBuf, 1001);
   return p;
 }
 char n;//从这开始为重要程序
@@ -208,9 +207,7 @@ void linkBluetooth()
     Serial.print("AT+CONN");
     Serial.println(bluetooth[number]);
   }
-
 }
-
 *————————————————————————————————————————————————*
 char n;//从这开始为重要程序
 int id = 1;
@@ -253,6 +250,5 @@ void loop()
       //int id3 = (int(id1)-48)*(int(id2)-48);
       //Serial.println(nzh[id3]);//nzh[id3] 打印天气
       }
-
 *————————————————————————————————————————————————*
 */
