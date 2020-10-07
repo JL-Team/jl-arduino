@@ -103,20 +103,42 @@ void loop()
        JL_Set_Time();
   }      
   else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
+  while(Serial.available() > 0)//检测是否有输入
+  {
+    n = int(Serial.read());
+    if(n == '$')
+    {
+      delay(10);
+      Serial.println(T);//感染人数
+      RSCG12864B.print_string_12_xy(30,6,T);
+      Serial.println(C);//年月日
+      RSCG12864B.print_string_12_xy(30,26,C);
+      Serial.println(Q);//天气
+      RSCG12864B.print_string_12_xy(30,46,Q);
+      id = 1;
+      T = "";
+      C = "";
+      Q = "";
+    }
+    else if(n == ';')
+    {
+      id++;
+      //Serial.println(id);
+    }
+    else
+    {
+      switch(id)
+      {
+        case 1:T = T+String(n);break;
+        case 2:C = C+String(n);break;
+        case 3:Q = Q+String(n);break;
+        default:break;
+      }
+    }
+  }
 }
 
-
-
-
-
-///////hi，在看吗？
-//////能看到吗？
-/////对了这个程序不是最新的
 /*
-void setup()
-{
-  Serial.begin(9600);//波特率9600删掉
-}
 char n;//从这开始为重要程序
 void loop()
 {
@@ -134,7 +156,6 @@ void loop()
   }
 }
 */
-
 /*
 *————————————————————————————————————————————————*
 a = ["晴","多云","阴天","雾","小雨","中雨","大雨","暴雨","雷阵雨","冰雹","冻雨","雨夹雪","小雪","中雪","暴雪","大雪","霜冻","大风","台风"]
@@ -166,10 +187,6 @@ void linkBluetooth()
 }
 
 *————————————————————————————————————————————————*
-void setup()
-{
-  Serial.begin(9600);//波特率9600删掉
-}
 char n;//从这开始为重要程序
 int id = 1;
 String T = "";
