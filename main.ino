@@ -92,3 +92,33 @@ void loop()
     else if(tpressed==1 && digitalRead(8)==1)      tpressed = 0;
 
 }
+
+
+
+
+
+
+
+
+/*
+void setup()
+{
+  Serial.begin(9600);
+}
+char n;
+void loop()
+{
+  while(Serial.available() > 0)
+  {
+    n = int(Serial.read());
+    if(n == ';')
+    {
+      Serial.println("");
+    }
+    else
+    {
+      Serial.print(n);
+    }
+  }
+}
+*/
