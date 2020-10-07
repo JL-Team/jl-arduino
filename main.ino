@@ -139,8 +139,29 @@ void loop()
 *————————————————————————————————————————————————*
 a = ["晴","多云","阴天","雾","小雨","中雨","大雨","暴雨","雷阵雨","冰雹","冻雨","雨夹雪","小雪","中雪","暴雪","大雪","霜冻","大风","台风"]
 a = ["Sunny","Partly Cloudy","Cloudy","Foggy","Light Rain","Rain","Heavy Rain","Thunderstorm","Thundershower","Hail","Freezing Rain","Sleet","Light Snow","Moderate Snow","SnowStorm","Heavy Snow","Frost","Gale","Typhoon"]
+*————————————————————————————————————————————————*
+void linkBluetooth()
+{
+  char number;
+  Serial.println("AT+INQ");
+  delay(2000);
+  for(int i = 0; i < 3; i++)
+  {
+    while(Serial.available() > 0)
+    {
+      bluetooth += char(Serial.read());
+      delay(2);
+    }
+    delay(20);
+  }
+  number = bluetooth.indexOf(address) - 2;
+  if(number)
+  {
+    Serial.print("AT+CONN");
+    Serial.println(bluetooth[number]);
+  }
 
-
+}
 
 *————————————————————————————————————————————————*
 */
