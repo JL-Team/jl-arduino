@@ -103,21 +103,21 @@ void loop()
 /*
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(9600);//波特率9600删掉
 }
-char n;
+char n;//从这开始为重要程序
 void loop()
 {
-  while(Serial.available() > 0)
+  while(Serial.available() > 0)//检测是否有输入
   {
-    n = int(Serial.read());
+    n = int(Serial.read());//存入N
     if(n == ';')
     {
-      Serial.println("");
+      Serial.println("");//检测是否是结尾
     }
     else
     {
-      Serial.print(n);
+      Serial.print(n);//打印 可改为输出到屏幕
     }
   }
 }
